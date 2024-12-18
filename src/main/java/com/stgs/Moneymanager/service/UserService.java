@@ -14,14 +14,7 @@ public class UserService {
 
     public User registerUser(User user) {
 
-        if (repo.findByUsername(user.getUsername()).isPresent()) {
-            throw new IllegalArgumentException("Username already exists!");
-        }
-        if (repo.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already exists!");
-        }
-
-        return repo.save(user);
+       return repo.save(user);
     }
 
     public User getUserByUsername(String username) {
