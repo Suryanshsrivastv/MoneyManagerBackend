@@ -23,6 +23,10 @@ public class BudgetController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/test")
+    public String home(){
+        return "the api is up and runninggggg";
+    }
     // Add a new budget
     @PostMapping
     public ResponseEntity<?> addBudget(@RequestBody @Valid Budget budget) {
