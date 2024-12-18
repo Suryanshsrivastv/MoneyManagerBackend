@@ -14,7 +14,15 @@ public class UserController {
 
     @PostMapping("/register")
     public User registerUser(@RequestBody User user){
-        return service.registerUser(user);
+         try {
+        userService.registerUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully!");
+    } catch (DataIntegrityViolationException e) {
+        // Handle duplicate entry error from the database (for username or email)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username or email already exists!");
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+    }
     }
 
     @GetMapping("/{username}")
